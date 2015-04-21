@@ -1,2 +1,2 @@
 # spark-libFM
-An implement of Factorization Machines (LibFM)
+An implementation of Factorization Machines (LibFM)
