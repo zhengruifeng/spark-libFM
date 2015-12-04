@@ -2,7 +2,7 @@ package org.apache.spark.mllib.regression
 
 import org.apache.spark.Logging
 import org.apache.spark.mllib.linalg.{DenseMatrix, Vectors, Vector}
-import org.apache.spark.mllib.optimiztion.LBFGSX
+import org.apache.spark.mllib.optimization.LBFGS
 import org.apache.spark.rdd.RDD
 import org.apache.spark.storage.StorageLevel
 
@@ -212,7 +212,7 @@ class FMWithLBFGS(private var task: Int,
 
     val updater = new FMUpdater(k0, k1, k2, r0, r1, r2, numFeatures)
 
-    val optimizer = new LBFGSX(gradient, updater)
+    val optimizer = new LBFGS(gradient, updater)
       .setNumIterations(numIterations)
 
     val data = task match {

@@ -17,12 +17,12 @@ import org.apache.spark.mllib.util.{Loader, Saveable}
 import org.apache.spark.sql.{DataFrame, SQLContext}
 
 /**
- * Created by zrf on 4/13/15.
- */
+  * Created by zrf on 4/13/15.
+  */
 
 /**
- * Factorization Machine model.
- */
+  * Factorization Machine model.
+  */
 class FMModel(val task: Int,
               val factorMatrix: Matrix,
               val weightVector: Option[Vector],
@@ -161,11 +161,11 @@ object FMModel extends Loader[FMModel] {
 
 
 /**
- * :: DeveloperApi ::
- * Compute gradient and loss for a Least-squared loss function, as used in linear regression.
- * For the detailed mathematical derivation, see the reference at
- * http://doi.acm.org/10.1145/2168752.2168771
- */
+  * :: DeveloperApi ::
+  * Compute gradient and loss for a Least-squared loss function, as used in linear regression.
+  * For the detailed mathematical derivation, see the reference at
+  * http://doi.acm.org/10.1145/2168752.2168771
+  */
 class FMGradient(val task: Int, val k0: Boolean, val k1: Boolean, val k2: Int,
                  val numFeatures: Int, val min: Double, val max: Double) extends Gradient {
 
@@ -256,18 +256,18 @@ class FMGradient(val task: Int, val k0: Boolean, val k1: Boolean, val k2: Int,
 
     task match {
       case 0 =>
-        (pred - label) * (pred - label) / 2
+        (pred - label) * (pred - label)
       case 1 =>
-        (1 - Math.signum(pred * label)) / 2
+        1 - Math.signum(pred * label)
     }
   }
 }
 
 /**
- * :: DeveloperApi ::
- * Updater for L2 regularized problems.
- * Uses a step-size decreasing with the square root of the number of iterations.
- */
+  * :: DeveloperApi ::
+  * Updater for L2 regularized problems.
+  * Uses a step-size decreasing with the square root of the number of iterations.
+  */
 class FMUpdater(val k0: Boolean, val k1: Boolean, val k2: Int,
                 val r0: Double, val r1: Double, val r2: Double,
                 val numFeatures: Int) extends Updater {
