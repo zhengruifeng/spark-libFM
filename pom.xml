@@ -10,11 +10,11 @@
 
     <properties>
         <project.version>1.0-SNAPSHOT</project.version>
-        <java.version>1.7</java.version>
+        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <scala.version>2.10.5</scala.version>
+        <scala.version>2.10.6</scala.version>
         <scala.main.verison>2.10</scala.main.verison>
-        <spark.version>1.5.1</spark.version>
+        <spark.version>1.6.1</spark.version>
     </properties>
 
     <dependencies>
@@ -50,7 +50,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.5.1</version>
                 <configuration>
                     <!-- <defaultLibBundleDir>lib</defaultLibBundleDir> -->
                     <source>${java.version}</source>

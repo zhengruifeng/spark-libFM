@@ -217,11 +217,6 @@ class FMWithSGD(private var task: Int,
     */
   def run(input: RDD[LabeledPoint]): FMModel = {
 
-    if (input.getStorageLevel == StorageLevel.NONE) {
-      logWarning("The input data is not directly cached, which may hurt performance if its"
-        + " parent RDDs are also uncached.")
-    }
-
     this.numFeatures = input.first().features.size
     require(numFeatures > 0)
 
@@ -246,6 +241,7 @@ class FMWithSGD(private var task: Int,
       .setStepSize(stepSize)
       .setNumIterations(numIterations)
       .setMiniBatchFraction(miniBatchFraction)
+      .setConvergenceTol(Double.MinPositiveValue)
 
     val data = task match {
       case 0 =>

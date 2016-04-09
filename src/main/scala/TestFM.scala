@@ -1,10 +1,4 @@
-import com.github.fommil.netlib.BLAS._
-import com.github.fommil.netlib.BLAS.{getInstance => blas}
 
-import scala.util.Random
-
-import org.apache.spark.mllib.linalg._
-import org.apache.spark.mllib.evaluation.RegressionMetrics
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.mllib.regression._
 import org.apache.spark.mllib.util.MLUtils
