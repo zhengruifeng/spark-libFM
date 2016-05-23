@@ -48,7 +48,7 @@ object FMWithSGD {
   def train(input: RDD[LabeledPoint],
             task: Int,
             numIterations: Int): FMModel = {
-    new FMWithSGD(task, 1.0, numIterations, (true, true, 8), (0, 1e-3, 1e-4), 1e-5)
+    new FMWithSGD(task, 1.0, numIterations, (true, true, 8), (0, 1e-2, 1e-2), 1.0)
       .setInitStd(0.01)
       .run(input)
   }
@@ -67,7 +67,7 @@ class FMWithSGD(private var task: Int,
     * Construct an object with default parameters: {task: 0, stepSize: 1.0, numIterations: 100,
     * dim: (true, true, 8), regParam: (0, 0.01, 0.01), miniBatchFraction: 1.0}.
     */
-  def this() = this(0, 1.0, 100, (true, true, 8), (0, 1e-3, 1e-4), 1e-5)
+  def this() = this(0, 1.0, 100, (true, true, 8), (0, 1e-2, 1e-2), 1.0)
 
   private var k0: Boolean = dim._1
   private var k1: Boolean = dim._2
