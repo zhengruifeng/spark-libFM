@@ -107,13 +107,13 @@ object FMModel extends Loader[FMModel] {
 
       // Create Parquet data.
       val dataRDD: DataFrame = sc.parallelize(Seq(data), 1).toDF()
-      dataRDD.saveAsParquetFile(dataPath(path))
+      dataRDD.write.parquet(dataPath(path))
     }
 
     def load(sc: SparkContext, path: String): FMModel = {
       val sqlContext = new SQLContext(sc)
       // Load Parquet data.
-      val dataRDD = sqlContext.parquetFile(dataPath(path))
+      val dataRDD = sqlContext.read.parquet(dataPath(path))
       // Check schema explicitly since erasure makes it hard to use match-case for checking.
       checkSchema[Data](dataRDD.schema)
       val dataArray = dataRDD.select("task", "factorMatrix", "weightVector", "intercept", "min", "max").take(1)
