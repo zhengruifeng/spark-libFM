@@ -169,7 +169,7 @@ class FMWithSGD(private var task: Int,
 
   /**
     * Encode the FMModel to a dense vector, with its first numFeatures * numFactors elements representing the
-    * factorization matrix v, sequential numFeaturs elements representing the one-way interactions weights w if k1 is
+    * factorization matrix v, sequential numFeatures elements representing the one-way interactions weights w if k1 is
     * set to true, and the last element representing the intercept w0 if k0 is set to true.
     * The factorization matrix v is initialized by Gaussinan(0, initStd).
     * v : numFeatures * numFactors + w : [numFeatures] + w0 : [1]
@@ -195,7 +195,7 @@ class FMWithSGD(private var task: Int,
 
 
   /**
-    * Create a FMModle from an encoded vector.
+    * Create a FMModel from an encoded vector.
     */
   private def createModel(weights: Vector): FMModel = {
 
