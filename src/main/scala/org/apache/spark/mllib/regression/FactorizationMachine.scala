@@ -36,7 +36,7 @@ class FMModel(val task: Int,
   require(task == 0 || task == 1)
 
   def predict(testData: Vector): Double = {
-    require(testData.size == numFeatures)
+    require(testData.size <= numFeatures)
 
     var pred = intercept
     if (weightVector.isDefined) {

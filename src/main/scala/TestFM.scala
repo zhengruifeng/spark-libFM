@@ -3,6 +3,7 @@ import org.apache.spark.mllib.evaluation.RegressionMetrics
 import org.apache.spark.{Logging, SparkConf, SparkContext}
 import org.apache.spark.mllib.regression._
 import org.apache.spark.mllib.util.MLUtils
+import org.apache.spark.rdd.RDD
 
 
 object TestFM extends App with Logging {
@@ -23,7 +24,8 @@ object TestFM extends App with Logging {
     //    val miniBatchFraction = args(4).toDouble
 
     val fm = FMWithSGD.train(
-      trainDataset, task = 1,
+      trainDataset,
+      task = 0,
       numIterations = 10,
       stepSize = 0.1,
       miniBatchFraction = 1.0,
@@ -31,7 +33,15 @@ object TestFM extends App with Logging {
       regParam = (0, 0, 0),
       initStd = 0.01)
 
-    val predictionsAndLabels = testDataset.map(x => (fm.predict(x.features), x.label))
+    logInfo("trainDataset metrics")
+    logMetrics(fm, trainDataset)
+
+    logInfo("testDataset metrics")
+    logMetrics(fm, testDataset)
+  }
+
+  def logMetrics(fm: FMModel, dataset: RDD[LabeledPoint]): Unit = {
+    val predictionsAndLabels = dataset.map(x => (fm.predict(x.features), x.label))
     val metrics = new RegressionMetrics(predictionsAndLabels)
     logInfo(s"metrics.rootMeanSquaredError: ${metrics.rootMeanSquaredError}")
     logInfo(s"metrics.r2: ${metrics.r2}")
